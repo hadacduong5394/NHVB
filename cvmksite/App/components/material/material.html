@@ -1,0 +1,92 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4>DANH SÁCH CÁC NGUYÊN LIỆU</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">Mã</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="code" ng-keyup="pressEnter($event)" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">Tên</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="name" ng-keyup="pressEnter($event)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ClearFix"></div>
+                <div class="row">
+                    <div class="col-sm-offset-3 col-sm-2 col-xs-offset-3 col-xs-2"></div>
+                    <button type="button" ng-click="getbyfilter()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> Tìm kiếm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-body">
+                <div class="col-sm-1 pull-right">
+                    <a ui-sref="creatematerial" class="btn btn-info element-right"><i class="fa fa-plus"></i>Tạo mới</a>
+                </div>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center; width: 30px">STT</th>
+                            <th>Ảnh</th>
+                            <th>Mã NL</th>
+                            <th>Tên NL</th>
+                            <th>Giá gốc</th>
+                            <th style="width: 100px">Số lượng</th>
+                            <th style="width: 100px">ĐVT</th>
+                            <th style="text-align: center; width: 100px">Trạng thái</th>
+                            <th style="text-align: center; width: 30px">Sửa</th>
+                            <th style="text-align: center; width: 30px">Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in materials">
+                            <td align="center">
+                                {{(pageSize * page) + $index + 1}}
+                            </td>
+                            <td>
+                                <img ng-src="{{item.Image}}" alt="ảnh" style="width: 30px; height: 40px;" />
+                            </td>
+                            <td>{{item.Code}}</td>
+                            <td>{{item.Name}}</td>
+                            <td align="right">{{item.RootPrice | number:0}}</td>
+                            <td align="right">{{item.Quantity}}</td>
+                            <td align="center">{{item.Unit}}</td>
+                            <td align="center"><i ng-class="{'fa fa-check':item.Status==true}"></i></td>
+                            <td align="center">
+                                <a title="Sửa đổi" ui-sref="editmaterial({id:item.Id})">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                            </td>
+                            <td align="center">
+                                <a title="Xóa" href="javascript:void(0);" ng-click="delete(item.Id)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-footer">
+                <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="getbyfilter(page)"></pager-directive>
+            </div>
+        </div>
+    </div>
+</div>

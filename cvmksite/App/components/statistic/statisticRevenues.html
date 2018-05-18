@@ -1,0 +1,103 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4>BÁO CÁO TÌNH HÌNH NHẬP HÀNG</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-4">
+                                Năm:
+                            </label>
+                            <div class="col-sm-8">
+                                <select class="form-control" ng-model="currentYear" ng-change="loadmonths()" ng-options="item for item in years" required></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-4">
+                                Tháng:
+                            </label>
+                            <div class="col-sm-8">
+                                <select class="form-control" ng-model="currentMonth" ng-change="getStatistic()" ng-options="item for item in months" required></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ClearFix"></div>
+                <div class="row">
+                    <div class="col-sm-offset-4 col-sm-2 col-xs-offset-4 col-xs-2"></div>
+                    <button type="button" ng-click="getStatistic()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> Tìm kiếm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-body">
+                <div class="row">
+                    <!-- Left col -->
+                    <section class="col-lg-7">
+                        <!-- Custom tabs (Charts with tabs)-->
+                        <div class="nav-tabs-custom">
+                            <!-- Tabs within a box -->
+                            <ul class="nav nav-tabs pull-right">
+                                <li class="active"><a href="#revenue-chart" data-toggle="tab">Doanh thu</a></li>
+                            </ul>
+                            <div class="tab-content no-padding">
+                                <!-- Morris chart - Sales -->
+                                <canvas id="bar" class="chart chart-line" chart-data="chartdata" chart-labels="labels" chart-series="series"></canvas>
+                            </div>
+                        </div><!-- /.nav-tabs-custom -->
+
+                    </section><!-- /.Left col -->
+                    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                    <section class="col-lg-5">
+                        <!-- Map box -->
+                        <div class="box box-solid">
+                            <div class="box-header">
+                                <!-- tools box -->
+                                <i class="fa fa-map-marker"></i>
+                                <h3 class="box-title">
+                                    Dữ liệu thống kê
+                                </h3>
+                            </div>
+                            <div class="box-body">
+
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>Ngày</td>
+                                            <td>Tổng thu</td>
+                                            <td>Lợi nhuận</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in tabledata">
+                                            <td>
+                                                {{item.Date | date:'dd/MM/yyyy'}}
+                                            </td>
+                                            <td>
+                                                {{item.Revanues | number}}
+                                            </td>
+                                            <td>
+                                                {{item.Benefit | number}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div><!-- /.box-body-->
+                            <div class="box-footer no-border">
+                            </div>
+                        </div>
+                    </section><!-- right col -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

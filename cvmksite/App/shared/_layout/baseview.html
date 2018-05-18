@@ -1,0 +1,186 @@
+﻿<!-- Site wrapper -->
+<div class="wrapper">
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="javascript:void(0);" class="logo" ng-controller="topMenuController">
+            <span class="logo-lg"><b>{{username}}</b></span>
+        </a>
+
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" ng-controller="topMenuController">
+            <div class="row">
+                <div class="col-sm-1 col-xs-12">
+                    <!-- Sidebar toggle button-->
+                    <a href="javascript:void(0);" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                </div>
+                <div class="col-sm-10 col-xs-12">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown" ng-repeat="item in topmenu">
+                            <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="{{item.UI_SREF}}"><i class="{{item.ICon}}"></i> {{item.Name}} <span class="caret" ng-show="item.Childs.length>0"></span></a>
+                            <ul class="dropdown-menu" ng-show="item.Childs.length>0">
+                                <li ng-repeat="child in item.Childs"><a ui-sref="{{child.UI_SREF}}"><i class="{{child.ICon}}"></i> {{child.Name}}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><i class="glyphicon glyphicon-cog"></i> Hệ thống</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:void(0);" ng-click="showChange()"><i class="glyphicon glyphicon-cog"></i> Đổi thông tin</a></li>
+                                <li ng-show="comId==-1"><a ui-sref="leftmenu"><i class="glyphicon glyphicon-align-left"></i> Menu bên trái</a></li>
+                                <li ng-show="comId==-1"><a ui-sref="topmenu"><i class="glyphicon glyphicon-align-right"></i> Menu trên tốp</a></li>
+                                <li><a href="javascript:void(0);" ng-click="openmodalchangpassword()"><i class="glyphicon glyphicon-wrench"></i> Đổi mật khẩu</a></li>
+                                <li><a href="#" ng-click="logout()"><i class="glyphicon glyphicon-log-out"></i> Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- =============================================== -->
+    <!-- Left side column. contains the sidebar -->
+    <aside class="main-sidebar" ng-controller="leftMenuController">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="header">Các chức năng</li>
+                <li class="treeview" ng-repeat="item in leftmenu">
+                    <a href="javascript:void(0);">
+                        <i class="{{item.Icon}}"></i> <span> {{item.Name}}</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li ng-repeat="child in item.Childs">
+                            <a ui-sref="{{child.UI_SREF}}"><i class="fa fa-circle-o"></i> {{child.Name}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+    <!-- =============================================== -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="min-height:695px;">
+        <div ui-view></div>
+        <div class="modal modal-default" id="modalChangePassword" ng-controller="topMenuController">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4><i class="fa fa-eye"></i> ĐỔI MẬT KHẨU</h4>
+                    </div>
+                    <div class="modal-body form-horizontal">
+                        <form role="form" class="form-horizontal" novalidate name="frmChangePass" ng-submit="changePassword()">
+                            <div class="form-group">
+                                <label class="col-sm-3">
+                                    Mật khẩu hiện tại:
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="password" ng-model="userdata.currentpass" name="currentpass" class="form-control" ng-required="true" ng-minlength="6" ng-maxlength="50" />
+                                    <span ng-show="frmChangePass.currentpass.$error.required" class="error">mật khẩu hiện tại không được bỏ trống</span>
+                                    <span ng-show="frmChangePass.currentpass.$error.minlength" class="error">mật khẩu hiện tại không it hơn 6 kí tự</span>
+                                    <span ng-show="frmChangePass.currentpass.$error.maxlength" class="error">mật khẩu hiện tại không vượt quá 50 kí tự</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3">
+                                    Mật khẩu mới:
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="password" ng-model="userdata.newpass" name="newpass" class="form-control" ng-required="true" ng-minlength="6" ng-maxlength="50" ng-change="confirmPass()" />
+                                    <span ng-show="frmChangePass.newpass.$error.required" class="error">mật khẩu mới không được bỏ trống</span>
+                                    <span ng-show="frmChangePass.newpass.$error.minlength" class="error">mật khẩu mới không it hơn 6 kí tự</span>
+                                    <span ng-show="frmChangePass.newpass.$error.maxlength" class="error">mật khẩu mới không vượt quá 50 kí tự</span>
+                                    <span ng-show="confirmFlag" class="error">Mật khẩu mới và xác nhận lại chưa khớp</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3">
+                                    nhập lại mật khẩu:
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="password" ng-model="userdata.confirmpass" name="confirmpass" class="form-control" ng-required="true" ng-minlength="6" ng-maxlength="50" ng-change="confirmPass()" />
+                                    <span ng-show="frmChangePass.confirmpass.$error.required" class="error">mật khẩu xác nhận lại không được bỏ trống</span>
+                                    <span ng-show="frmChangePass.confirmpass.$error.minlength" class="error">mật khẩu xác nhận lại không it hơn 6 kí tự</span>
+                                    <span ng-show="frmChangePass.confirmpass.$error.maxlength" class="error">mật khẩu xác nhận lại không vượt quá 50 kí tự</span>
+                                    <span ng-show="confirmFlag" class="error">Mật khẩu mới và xác nhận lại chưa khớp</span>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="pull-right btn btn-primary" ng-disabled="frmChangePass.$invalid">
+                                    <i class="fa fa-save"></i> Thay đổi
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal modal-default" id="modalChangeInfo" ng-controller="companyInfoController">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4><i class="fa fa-eye"></i> ĐỔI THÔNG TIN CỬA HÀNG</h4>
+                    </div>
+                    <div class="modal-body form-horizontal">
+                        <form role="form" class="form-horizontal" novalidate name="frmChangeInfo" ng-submit="changeInfo()">
+                            <div class="form-group">
+                                <label class="col-sm-3">
+                                    Tên cửa hàng:
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" ng-model="company.Name" name="Name" class="form-control" ng-required="true" ng-maxlength="10" />
+                                    <span ng-show="frmChangeInfo.Name.$error.required" class="error">băt buộc</span>
+                                    <span ng-show="frmChangeInfo.Name.$error.maxlength" class="error">Không quá 6 kí tự</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3">
+                                    Khẩu hiệu: 
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" ng-model="company.LongTittle" name="LongTittle" class="form-control" ng-required="true" ng-maxlength="128" />
+                                    <span ng-show="frmChangeInfo.confirmpass.$error.required" class="error">băt buộc</span>
+                                    <span ng-show="frmChangeInfo.confirmpass.$error.maxlength" class="error">Không quá 128 kí tự</span>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="pull-right btn btn-primary" ng-disabled="frmChangeInfo.$invalid">
+                                    <i class="fa fa-save"></i> Thay đổi
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer" ng-controller="companyInfoController">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 1.0.0
+        </div>
+        <strong><a ui-sref="{{company.SrefLong}}">{{company.LongTittle}}</a></strong>
+    </footer>
+</div>
+<!-- ./wrapper -->

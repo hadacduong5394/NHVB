@@ -1,0 +1,111 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4>THÊM MỚI NGUYÊN LIỆU</h4>
+            </div>
+            <div class="panel-body">
+                <form role="form" class="form-horizontal" novalidate name="frm" ng-submit="create()">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="col-sm-4">
+                                Mã
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="Code" ng-model="material.Code" ng-required="true" ng-maxlength="128" />
+                                <span ng-show="frm.Code.$error.required" class="error">Mã không được bỏ trống</span>
+                                <span ng-show="frm.Code.$error.maxlength" class="error">Mã không vượt quá 128 kí tự</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-4">
+                                Tên
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="Name" ng-model="material.Name" ng-required="true" ng-maxlength="128" />
+                                <span ng-show="frm.Name.$error.required" class="error">Tên không được bỏ trống</span>
+                                <span ng-show="frm.Name.$error.maxlength" class="error">Tên không vượt quá 128 kí tự</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ClearFix"></div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="col-sm-4">
+                                Đơn vị tính
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="Unit" ng-model="material.Unit" ng-required="true" ng-maxlength="128" />
+                                <span ng-show="frm.Unit.$error.required" class="error">ĐVT không được bỏ trống</span>
+                                <span ng-show="frm.Unit.$error.maxlength" class="error">ĐVT không vượt quá 128 kí tự</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-4">
+                                Mô tả chung
+                            </label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="Descreption" ng-model="material.Descreption" maxlength="256"></textarea>
+                                <span ng-show="frm.Descreption.$error.maxlength" class="error">MTC không vượt quá 256 kí tự</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ClearFix"></div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="col-sm-4">
+                                Số lượng
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" name="Quantity" ng-model="material.Quantity" ng-required="true" ng-min="0" ng-max="1000000" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-4">
+                               Đơn giá
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" name="RootPrice" ng-model="material.RootPrice" ng-required="true" ng-min="0" ng-max="10000000" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ClearFix"></div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="col-sm-4">
+                                Ảnh đại diện
+                            </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="Image" ng-model="material.Image" />
+                            </div>
+                            <button type="button" class="btn btn-sm btn-default col-sm-2" ng-click="ChooseImage()"><i class="fa fa-plus"></i> Thêm ảnh</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-4">
+                                Ảnh đại diện
+                            </label>
+                            <div class="col-sm-6">
+                                <input type="checkbox" ng-model="material.Status" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ClearFix"></div>
+                    <div class="panel-footer">
+                        <div class="col-sm-offset-5 col-xs-offset-5">
+                            <button ui-sref="material" type="button" class="btn btn-default">
+                                Hủy
+                            </button>
+                            <button type="submit" class="btn btn-success" ng-disabled="frm.$invalid">
+                                Lưu
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

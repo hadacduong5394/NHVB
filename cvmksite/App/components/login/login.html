@@ -1,0 +1,38 @@
+﻿<div class="row" style="background: darkslategray;  min-height:795px;">
+    <div class="login-box">
+        <div class="login-box-body" style="border: 1px solid black; background-color: #ddd;">
+            <p class="login-box-msg"><label>ĐĂNG NHẬP QUẢN TRỊ</label></p>
+            <form role="form" method="post" ng-submit="loginSubmit()">
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" placeholder="Tài khoản" ng-model="loginData.userName" minlength="5" required>
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="password" class="form-control" ng-model="loginData.password" placeholder="Mật khẩu" minlength="6" required>
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="row">
+                            <div class="col-sm-5 col-xs-5">
+                                <img src="{{dataCaptchaBase64}}" width="80" height="32" alt="captcha image" />
+                            </div>
+                            <div class="col-sm-7 col-xs-7">
+                                <input type="text" ng-model="captcha" class="form-control" minlength="4" maxlength="4" required />
+                            </div>
+                        </div>
+                    </div><!-- /.col -->
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Đăng nhập</button>
+                    </div><!-- /.col -->
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-offset-2 col-sm-8" style="text-align: center;">
+                        <a ui-sref="lostpassword">Quên mật khẩu</a>
+                    </div>
+                </div>
+            </form>
+        </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
+</div>

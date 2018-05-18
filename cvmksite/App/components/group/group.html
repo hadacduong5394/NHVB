@@ -1,0 +1,165 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4>
+                    DANH SÁCH NHÓM NGƯỜI DÙNG
+                </h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <label class="col-sm-3 label-control">
+                                Từ khóa
+                            </label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" ng-model="keyWord" ng-keyup="pressEnter($event)" />
+                            </div>
+                            <div class="col-sm-3">
+                                <button type="button" class="btn btn-primary" ng-click="getbyfilter()">
+                                    <i class="fa fa-search"></i>Tìm kiếm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-body">
+                <div class="col-sm-1 pull-right">
+                    <a ui-sref="creategroup" class="btn btn-info element-right"><i class="fa fa-plus"></i>Tạo mới</a>
+                </div>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center; width: 30px">
+                                STT
+                            </th>
+                            <th>
+                                Tên
+                            </th>
+                            <th>
+                                Mô tả
+                            </th>
+                            <th style="width: 100px; text-align: center">
+                                Ngày tạo
+                            </th>
+                            <th style="width: 100px; text-align: center">
+                                Trạng thái
+                            </th>
+                            <th style="text-align: center; width: 30px">
+                                Xem
+                            </th>
+                            <th style="text-align: center; width: 30px">
+                                Sửa
+                            </th>
+                            <th style="text-align: center; width: 30px">
+                                Xóa
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in groups">
+                            <td align="center">
+                                {{(pageSize * page) + $index + 1}}
+                            </td>
+                            <td>
+                                {{item.Name}}
+                            </td>
+                            <td>
+                                {{item.Descreption}}
+                            </td>
+                            <td align="center">
+                                {{item.CreateDate}}
+                            </td>
+                            <td align="center">
+                                <i ng-class="{'fa fa-check':item.Status==true, 'fa fa-close':item.Status==false}"></i>
+                            </td>
+                            <td align="center">
+                                <a href="javascript:void(0);" title="Xem chi tiết" ng-click="viewDetail(item.Id)">
+                                    <i class="glyphicon glyphicon-eye-open"></i>
+                                </a>
+                            </td>
+                            <td align="center">
+                                <a title="Sửa đổi" ui-sref="editgroup({id:item.Id})">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                            </td>
+                            <td align="center">
+                                <a title="Xóa" href="javascript:void(0);" ng-click="delete(item.Id)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-footer">
+                <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="getbyfilter(page)"></pager-directive>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-default" id="modalDetail">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4><i class="fa fa-eye"></i> Thông tin chi tiết</h4>
+            </div>
+            <div class="modal-body form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-3">Tên nhóm:</div>
+                    <p class="col-sm-7">{{group.Name}}</p>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-3">Mô tả:</div>
+                    <p class="col-sm-7">{{group.Descreption}}</p>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-3">Người tạo:</div>
+                    <p class="col-sm-7">{{group.CreateBy}}</p>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-3">Ngày tạo:</div>
+                    <p class="col-sm-7">{{group.CreateDate}}</p>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-3"> Người sửa lần cuối:</div>
+                    <p class="col-sm-7">{{group.UpdateBy}}</p>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-3">Lần Cuối Chỉnh Sửa:</div>
+                    <p class="col-sm-7">{{group.UpdateDate}}</p>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-3">Quyền khả dụng:</div>
+                    <p class="col-sm-7">{{roles}}</p>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-3">Trạng Thái:</div>
+                    <p class="col-sm-7">{{group.Status | statusFilter}}</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" data-dismiss="modal" class="pull-right btn btn-danger"><i class="fa fa-close"></i>Đóng</a>
+            </div>
+        </div>
+    </div>
+</div>

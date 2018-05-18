@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{87344BE3-DD9B-4E31-B797-93A908FE8CF6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>cvmk.service</RootNamespace>
+    <AssemblyName>cvmk.service</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\lib\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\lib\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="hd.context, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\hd.context.dll</HintPath>
+    </Reference>
+    <Reference Include="hd.core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\hd.core.dll</HintPath>
+    </Reference>
+    <Reference Include="hd.data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\hd.data.dll</HintPath>
+    </Reference>
+    <Reference Include="hdidentity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\hdidentity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helper\KeyCode.cs" />
+    <Compile Include="Implement\ArticleCategoryService.cs" />
+    <Compile Include="Implement\CompanyInfoService.cs" />
+    <Compile Include="Implement\CustomerCodeService.cs" />
+    <Compile Include="Implement\CustomerService.cs" />
+    <Compile Include="Implement\ErrorService.cs" />
+    <Compile Include="Implement\FloorService.cs" />
+    <Compile Include="Implement\GroupProductCategoryService.cs" />
+    <Compile Include="Implement\ImportProductCodeService.cs" />
+    <Compile Include="Implement\ImportProductDetailService.cs" />
+    <Compile Include="Implement\ImportProductService.cs" />
+    <Compile Include="Implement\LeftMenuService.cs" />
+    <Compile Include="Implement\MaterialCodeService.cs" />
+    <Compile Include="Implement\MaterialService.cs" />
+    <Compile Include="Implement\OrderCodeService.cs" />
+    <Compile Include="Implement\OrderDetailService.cs" />
+    <Compile Include="Implement\OrderService.cs" />
+    <Compile Include="Implement\ProductCodeService.cs" />
+    <Compile Include="Implement\ProductMaterialService.cs" />
+    <Compile Include="Implement\ProductPropertisService.cs" />
+    <Compile Include="Implement\ProductService.cs" />
+    <Compile Include="Implement\RoomService.cs" />
+    <Compile Include="Implement\SupplierCodeService.cs" />
+    <Compile Include="Implement\SupplierService.cs" />
+    <Compile Include="Implement\TopMenuService.cs" />
+    <Compile Include="Implement\TypeProductCategoryService.cs" />
+    <Compile Include="Interface\IArticleCategoryService.cs" />
+    <Compile Include="Interface\ICompanyInfoService.cs" />
+    <Compile Include="Interface\ICustomerCodeService.cs" />
+    <Compile Include="Interface\ICustomerService.cs" />
+    <Compile Include="Interface\IErrorService.cs" />
+    <Compile Include="Interface\IFloorService.cs" />
+    <Compile Include="Interface\IGroupProductCategoryService.cs" />
+    <Compile Include="Interface\IImportProductCodeService.cs" />
+    <Compile Include="Interface\IImportProductDetailService.cs" />
+    <Compile Include="Interface\IImportProductService.cs" />
+    <Compile Include="Interface\ILeftMenuService.cs" />
+    <Compile Include="Interface\IMaterialCodeService.cs" />
+    <Compile Include="Interface\IMaterialService.cs" />
+    <Compile Include="Interface\IOrderCodeService.cs" />
+    <Compile Include="Interface\IOrderDetailService.cs" />
+    <Compile Include="Interface\IOrderService.cs" />
+    <Compile Include="Interface\IProductCodeService.cs" />
+    <Compile Include="Interface\IProductMaterialService.cs" />
+    <Compile Include="Interface\IProductPropertisService.cs" />
+    <Compile Include="Interface\IProductService.cs" />
+    <Compile Include="Interface\IRoomService.cs" />
+    <Compile Include="Interface\ISupplierCodeService.cs" />
+    <Compile Include="Interface\ISupplierService.cs" />
+    <Compile Include="Interface\ITopMenuService.cs" />
+    <Compile Include="Interface\ITypeProductCategoryService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\cvmk.context\cvmk.context.csproj">
+      <Project>{4B43C330-E422-4980-9353-37119E64585D}</Project>
+      <Name>cvmk.context</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

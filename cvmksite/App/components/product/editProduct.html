@@ -1,0 +1,383 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-target="#ProductInfo" data-toggle="tab">Thông tin sản phẩm</a>
+                    </li>
+                    <li>
+                        <a data-target="#Material" data-toggle="tab">Nguyên liệu tạo thành</a>
+                    </li>
+                    <li>
+                        <a data-target="#ProductDetailContent" data-toggle="tab">Bài viết chi tiết</a>
+                    </li>
+                    <li>
+                        <a data-target="#ProductProp" data-toggle="tab">Thuộc tính mở rộng</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <form role="form" id="detail-form" class="form-horizontal" novalidate name="frm" ng-submit="update()">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="ProductInfo">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4">Nhóm sản phẩm: </label>
+                                        <div class="col-sm-7 col-xs-11">
+                                            <select class="form-control" ng-model="product.GroupId" ng-options="item.Id as item.Name for item in groups" required>
+                                                <option value="">--Chọn nhóm sản phẩm--</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-1">
+                                            <button class="btn btn-sm btn-default" title="Thêm mới nhóm sản phẩm" ng-click="showAddGroupProduct()" type="button"><i class="fa fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4">Loại sản phẩm: </label>
+                                        <div class="col-sm-7 col-xs-11">
+                                            <select class="form-control" ng-model="product.TypeId" ng-options="item.Id as item.Name for item in types" required>
+                                                <option value="">--Chọn loại sản phẩm--</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-1">
+                                            <button class="btn btn-sm btn-default" title="Thêm mới nhóm sản phẩm" ng-click="showAddTypeProduct()" type="button"><i class="fa fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4">Mã sản phẩm: </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="BarCode" ng-model="product.BarCode" required ng-maxlength="128" />
+                                            <span ng-show="frm.BarCode.$error.required" class="error">Mã không được bỏ trống</span>
+                                            <span ng-show="frm.BarCode.$error.maxlength" class="error">Mã không vượt quá 128 kí tự</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4">Tên sản phẩm: </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="Name" ng-model="product.Name" required ng-maxlength="128" />
+                                            <span ng-show="frm.Name.$error.required" class="error">Tên không được bỏ trống</span>
+                                            <span ng-show="frm.Name.$error.maxlength" class="error">Tên không vượt quá 128 kí tự</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4">Số lượng: </label>
+                                        <div class="col-sm-8">
+                                            <input type="number" class="form-control" min="0" max="10000" ng-model="product.Quantity" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4">Đơn vị tính: </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" ng-model="product.Unit" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4">Giá gốc: </label>
+                                        <div class="col-sm-8">
+                                            <input type="number" class="form-control" min="0" max="100000000" ng-model="product.RootPrice" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4">Giá bán: </label>
+                                        <div class="col-sm-8">
+                                            <input type="number" class="form-control" min="0" max="100000000" ng-model="product.Price" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4">
+                                            Mô tả:
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <textarea class="form-control" ng-model="product.Descreption"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4">
+                                            Ảnh đại diện:
+                                        </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" ng-model="product.Image" />
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <button type="button" class="btn btn-sm btn-default" ng-click="ChooseImage()"><i class="fa fa-plus"></i> Thêm ảnh</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4">
+                                            Ảnh sản phẩm:
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <ul class="list-inline">
+                                                <li ng-repeat="img in Images">
+                                                    <img ng-src="{{img}}" width="100" height="120" style="border: 1px dotted black" alt="" />
+                                                </li>
+                                            </ul>
+                                            <button type="button" class="btn btn-sm btn-default" ng-click="ChooseImages()"><i class="fa fa-plus"></i> Thêm ảnh</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4">
+                                            VIP:
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <input type="checkbox" ng-model="product.VIP" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4">
+                                            Trạng thái:
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <input type="checkbox" ng-model="product.Status" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="ProductProp">
+                            <div class="col-sm-1 pull-right">
+                                <a href="javascript:void(0);" class="btn btn-info element-right" ng-click="showModalProp()"><i class="fa fa-plus"></i>Tạo mới</a>
+                            </div>
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 80px; text-align: center;"></th>
+                                        <th style="width: 30%">Thuộc tính</th>
+                                        <th style="width: 70%">Giá trị</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in props">
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-default" ng-click="deleteProp(item.Id)"><i class="fa fa-trash"></i> Xóa</button>
+                                        </td>
+                                        <td>{{item.Key}}</td>
+                                        <td>{{item.Value}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="Material">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="box">
+                                        <div class="box-header">
+                                            Danh sách nguyên liệu
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="col-sm-6 col-xs-6" ng-repeat="item in materials">
+                                                <div class="products">
+                                                    <div class="imgProductMenu">
+                                                        <a href="javascript:void(0);" ng-click="chosseMaterial(item.Id, item.Code, item.Name, item.Unit, item.RootPrice)">
+                                                            <img ng-src="{{item.Image}}" alt="ảnh" title="item.Descreption" style="width: 60px; height: 60px;" />
+                                                        </a>
+                                                    </div>
+                                                    <div class="ProductInfo">
+                                                        <p><b>{{item.Code}}</b></p>
+                                                        <p><b>{{item.Name}}</b></p>
+                                                    </div>
+                                                </div>
+                                                <div class="ClearFix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="box-footer">
+                                            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="loadMaterials(page)"></pager-directive>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="box">
+                                        <div class="box-header">
+                                            Nguyên liệu đã chọn
+                                        </div>
+                                        <div class="box-body">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="text-align: center; width: 30px;">Xóa</th>
+                                                        <th style="width: 80px">Mã</th>
+                                                        <th style="width: 100px">Tên</th>
+                                                        <th style="width: 50px">SL</th>
+                                                        <th style="width: 100px">Đơn giá</th>
+                                                        <th style="width: 80px">ĐVT</th>
+                                                        <th style="width: 100px">Tổng</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="item in lstMaterialChoossed">
+                                                        <td align="center">
+                                                            <a href="javascript:void(0);" ng-click="deleteMaterialChoosed(item.MaterialId)"><i class="fa fa-trash"></i></a>
+                                                        </td>
+                                                        <td>{{item.MaterialCode}}</td>
+                                                        <td>{{item.MaterialName}}</td>
+                                                        <td>
+                                                            <input type="number" class="input-sm form-control" ng-model="item.Quantity" ng-blur="ChangeMaterial(item.MaterialId)" min="0" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" class="input-sm form-control" ng-model="item.Price" ng-blur="ChangeMaterial(item.MaterialId)" min="0" />
+                                                        </td>
+                                                        <td align="center">{{item.Unit}}</td>
+                                                        <td align="right">{{item.Amount | number:0}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="ProductDetailContent">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2">Chi tiết: </label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" name="Descreption" ckeditor="ckeditorOptions" ng-model="product.Content"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="col-sm-offset-5 col-xs-offset-5">
+                            <button ui-sref="product" type="button" class="btn btn-default">
+                                Hủy
+                            </button>
+                            <button type="submit" class="btn btn-success" ng-disabled="frm.$invalid">
+                                Lưu
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal modal-small" id="modalAddType">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4>Thêm mới loại sản phẩm</h4>
+            </div>
+            <div class="modal-body form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3">Tên loại SP: </label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" required ng-model="type.Name" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3">Trạng thái: </label>
+                    <div class="col-sm-9">
+                        <input type="checkbox" ng-model="type.Status" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0);" data-dismiss="modal" class="pull-right btn btn-danger" ng-click="addTypeProduct()"><i class="fa fa-save"></i> Lưu</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal modal-small" id="modalAddGroup">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4>Thêm mới nhóm sản phẩm</h4>
+            </div>
+            <div class="modal-body form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3">Tên nhóm SP: </label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" required ng-model="group.Name" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3">Trạng thái: </label>
+                    <div class="col-sm-9">
+                        <input type="checkbox" ng-model="group.Status" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0);" data-dismiss="modal" class="pull-right btn btn-danger" ng-click="addGropuProduct()"><i class="fa fa-save"></i> Lưu</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal modal-small" id="modalAddProps">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4>Thông tin thuộc tính mở rộng</h4>
+            </div>
+            <div class="modal-body form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3">Thuộc tính: </label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" required ng-model="prop.Key" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3">Giá trị: </label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" required ng-model="prop.Value" />
+                        <span class="error">{{errorProp}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0);" class="pull-right btn btn-danger" ng-click="addProp()"><i class="fa fa-save"></i> Lưu</a>
+            </div>
+        </div>
+    </div>
+</div>

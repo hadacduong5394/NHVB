@@ -1,0 +1,135 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4>THÔNG TIN NGƯỜI DÙNG</h4>
+            </div>
+            <div class="panel-body">
+                <form role="form" id="detail-form" class="form-horizontal col-sm-offset-2 col-sm-8" novalidate name="frm" ng-submit="create()">
+                    
+                    <div class="form-group" ng-show="isRoot">
+                        <label class="col-sm-3 label-control">
+                            Nhóm
+                        </label>
+                        <div class="col-sm-9">
+                            <select class="form-control" ng-model="user.TeamId" ng-options="item.Id as item.Name for item in teams" ng-required="true"></select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="isRoot">
+                        <label class="col-sm-3 label-control">
+                            Cơ sở:
+                        </label>
+                        <div class="col-sm-9">
+                            <select class="form-control" ng-model="user.ComId" ng-options="item.Id as item.Name for item in companies" ng-required="true">
+                                <option value="">--chọn cơ sở--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 label-control">
+                            Tên đăng nhập
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" name="UserName" class="form-control" ng-required="true" ng-minlength="5" ng-maxlength="128" ng-model="user.UserName" />
+                            <span ng-show="frm.UserName.$error.required" class="error">Tên đăng nhập không được bỏ trống</span>
+                            <span ng-show="frm.UserName.$error.minlength" class="error">Tên đăng nhập không ít hơn 5  kí tự</span>
+                            <span ng-show="frm.UserName.$error.maxlength" class="error">Tên đăng nhập không vượt quá 128  kí tự</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 label-control">
+                            Mật khẩu
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="password" name="PassWord" class="form-control" ng-required="true" ng-minlength="6" ng-maxlength="50" ng-model="user.PassWord" />
+                            <span ng-show="frm.PassWord.$error.required" class="error">Mật khẩu không được bỏ trống</span>
+                            <span ng-show="frm.PassWord.$error.minlength" class="error">Mật khẩu không ít hơn 6 kí tự</span>
+                            <span ng-show="frm.PassWord.$error.maxlength" class="error">Mật khẩu không vượt quá 50  kí tự</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 label-control">
+                            Họ và tên
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="FullName" ng-required="true" ng-minlength="5" ng-maxlength="128" ng-model="user.FullName" />
+                            <span ng-show="frm.FullName.$error.required" class="error"> Họ và tên không được bỏ trống</span>
+                            <span ng-show="frm.FullName.$error.minlength" class="error"> Họ và tên không ít hơn 5  kí tự</span>
+                            <span ng-show="frm.FullName.$error.maxlength" class="error"> Họ và tên không vượt quá 128  kí tự</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 label-control">
+                          Email liện hệ
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" name="Email" ng-required="true" ng-model="user.Email" />
+                            <span ng-show="frm.Email.$error.required" class="error">Email không được bỏ trống</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 label-control">
+                            Điện thoại liên hệ
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="PhoneNumber" ng-minlength="10" ng-maxlength="11" ng-model="user.PhoneNumber" />
+                            <span ng-show="frm.PhoneNumber.$error.minlength" class="error">điện thoại liên hệ không ít hơn 10  kí tự</span>
+                            <span ng-show="frm.PhoneNumber.$error.maxlength" class="error">điện thoại liên hệ vượt quá 11  kí tự</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 label-control">
+                            Địa chỉ liên hệ
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="Address" ng-minlength="5" ng-maxlength="128" ng-model="user.Address" />
+                            <span ng-show="frm.Address.$error.minlength" class="error">Địa chỉ liên hệ không ít hơn 5  kí tự</span>
+                            <span ng-show="frm.Address.$error.maxlength" class="error">Địa chỉ liên hệ vượt quá 128  kí tự</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 label-control">
+                            Trạng thái
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="checkbox" ng-model="user.Status" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="box">
+                            <div class="box-header">
+                                <h5>Chọn nhóm người dùng mà người dùng này được thực thi</h5>
+                            </div>
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12" ng-repeat="group in groups">
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                                <label title="{{group.Descreption}}">
+                                                    <input type="checkbox" ng-model="group.IsCheck">
+                                                    <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                                                    {{group.Name}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="col-sm-offset-5 col-xs-offset-5">
+                            <button ui-sref="user" type="button" class="btn btn-default">
+                                Hủy
+                            </button>
+                            <button type="submit" class="btn btn-success" ng-disabled="frm.$invalid">
+                                Lưu
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,133 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4>THÔNG TIN NHÀ CUNG CẤP</h4>
+            </div>
+            <div class="panel-body">
+                <form role="form" id="detail-form" class="form-horizontal" novalidate name="frm" ng-submit="create()">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">
+                                    Mã:
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="Code" ng-model="entity.Code" required ng-maxlength="50" />
+                                    <span ng-show="frm.Code.$error.required" class="error">Mã không được bỏ trống</span>
+                                    <span ng-show="frm.Code.$error.maxlength" class="error">Mã không vượt quá 50 kí tự</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">
+                                    Tên:
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="Name" ng-model="entity.Name" required ng-maxlength="128" />
+                                    <span ng-show="frm.Name.$error.required" class="error">Tên không được bỏ trống</span>
+                                    <span ng-show="frm.Name.$error.maxlength" class="error">Tên không vượt quá 128 kí tự</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">
+                                    Địa chỉ:
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="entity.Address" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">
+                                    Email:
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="email" class="form-control" ng-model="entity.Email" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">
+                                    Mã số thuế:
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="entity.TaxCode" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">
+                                    Số điện thoại:
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="entity.PhoneNumber" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">
+                                    Logo:
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" ng-model="entity.Logo" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <button class="btn btn-default" type="button" ng-click="ChooseImage()">Chọn ảnh</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">
+                                    Trạng thái
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="checkbox" ng-model="entity.Status" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-8">
+                            <div class="form-group">
+                                <label class="col-sm-3">
+                                    Chú thích:
+                                </label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" ng-model="entity.Descreption"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-footer">
+                        <div class="col-sm-offset-5 col-xs-offset-5">
+                            <button ui-sref="supplier" type="button" class="btn btn-default">
+                                Hủy
+                            </button>
+                            <button type="submit" class="btn btn-success" ng-disabled="frm.$invalid">
+                                Lưu
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

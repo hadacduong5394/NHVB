@@ -1,0 +1,125 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4>THÔNG TIN ĐƠN HÀNG NHẬP HÀNG</h4>
+            </div>
+            <div class="panel-body">
+                <form role="form" id="detail-form" class="form-horizontal" novalidate name="frm" ng-submit="create()">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">Mã đơn hàng: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="Code" ng-model="ip.Code" required ng-maxlength="128" />
+                                    <span ng-show="frm.Code.$error.required" class="error">Mã không được bỏ trống</span>
+                                    <span ng-show="frm.Code.$error.maxlength" class="error">Mã không vượt quá 128 kí tự</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">Nhà cung cấp: </label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" ng-model="ip.SuppierCode" ng-options="item.Code as item.Name for item in suppliers" required>
+                                        <option value="">-- Chọn nhà cung cấp --</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">Mô tả: </label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" ng-model="ip.Descreption" ng-maxlength="256"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">Trạng thái: </label>
+                                <div class="col-sm-8">
+                                    <input type="checkbox" ng-model="ip.Status" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ClearFix"></div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="box">
+                                <div class="box-header">
+                                    <label>Chi tiết đơn hàng</label>
+                                </div>
+                                <div class="box-body">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 30px; text-align: center">Xóa</th>
+                                                <th style="min-width: 250px;">Sản phẩm</th>
+                                                <th>Diễn giải</th>
+                                                <th style="width: 150px;">Số lượng</th>
+                                                <th style="width: 150px;">Đơn giá</th>
+                                                <th style="width: 150px;">Thành tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in lstDetail">
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-default" ng-click="removeRow(item.Id)"><i class="fa fa-trash"></i> Xóa</button>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control" ng-model="item.ProductId" ng-options="entity.Id as entity.Name for entity in products" required>
+                                                        <option value="">-- Chọn sản phẩm --</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" ng-model="item.Descreption" />
+                                                </td>
+                                                <td align="right">
+                                                    <input type="number" class="form-control" ng-model="item.Quantity" ng-blur="reCalculate(item.Id)" />
+                                                </td>
+                                                <td align="right">
+                                                    <input type="number" class="form-control" ng-model="item.Amount" ng-blur="reCalculate(item.Id)" />
+                                                </td>
+                                                <td align="right">
+                                                    <input type="number" class="form-control" ng-model="item.TotalAmount" ng-blur="reCalculate(item.Id)" ng-keyup="nextLine($event)" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfooter>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <label>Tổng tiền:</label> 
+                                                </td>
+                                                <td align="right">
+                                                    {{ip.TotalAmount | number:0}}
+                                                </td>
+                                            </tr>
+                                        </tfooter>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="col-sm-offset-5 col-xs-offset-5">
+                            <button ui-sref="importproduct" type="button" class="btn btn-default">
+                                Hủy
+                            </button>
+                            <button type="submit" class="btn btn-success" ng-disabled="frm.$invalid">
+                                Lưu
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

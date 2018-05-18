@@ -1,0 +1,313 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4>DANH SÁCH SẢN PHẨM</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 label-control">Mã sản phẩm:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" ng-model="code" ng-keyup="pressEnter($event)" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 label-control">Tên sản phẩm:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" ng-model="name" ng-keyup="pressEnter($event)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ClearFix"></div>
+                <div class="row">
+                    <div class="col-sm-offset-3 col-sm-2 col-xs-offset-3 col-xs-2"></div>
+                    <button type="button" ng-click="getbyfilter()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> Tìm kiếm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-body">
+                <div class="col-sm-1 pull-right">
+                    <a ui-sref="createproduct" class="btn btn-info element-right"><i class="fa fa-plus"></i>Tạo mới</a>
+                </div>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center; width: 30px">STT</th>
+                            <th>Ảnh</th>
+                            <th>Mã SP</th>
+                            <th>Tên SP</th>
+                            <th>Mô tả</th>
+                            <th>Giá gốc</th>
+                            <th>Giá bán</th>
+                            <th style="width: 100px">Số lượng</th>
+                            <th style="text-align: center; width: 100px">Trạng thái</th>
+                            <th style="text-align: center; width: 30px">VIP</th>
+                            <th style="text-align: center; width: 30px">Xem</th>
+                            <th style="text-align: center; width: 30px">Sửa</th>
+                            <th style="text-align: center; width: 30px">Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in products">
+                            <td align="center">
+                                {{(pageSize * page) + $index + 1}}
+                            </td>
+                            <td>
+                                <img ng-src="{{item.Image}}" alt="ảnh sản phẩm" style="width: 30px; height: 40px;" />
+                            </td>
+                            <td>{{item.BarCode}}</td>
+                            <td>{{item.Name}}</td>
+                            <td>{{item.Descreption}}</td>
+                            <td align="right">{{item.RootPrice | number:0}}</td>
+                            <td align="right">{{item.Price | number:0}}</td>
+                            <td align="right">{{item.Quantity}}</td>
+                            <td align="center"><i ng-class="{'fa fa-check':item.Status==true}"></i></td>
+                            <td align="center"><i ng-class="{'fa fa-check':item.VIP==true}"></i></td>
+                            <td align="center">
+                                <a title="Xóa" href="javascript:void(0);" ng-click="viewDetail(item.Id)">
+                                    <i class="glyphicon glyphicon-eye-open"></i>
+                                </a>
+                            </td>
+                            <td align="center">
+                                <a title="Sửa đổi" ui-sref="editproduct({id:item.Id})">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                            </td>
+                            <td align="center">
+                                <a title="Xóa" href="javascript:void(0);" ng-click="delete(item.Id)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-footer">
+                <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="getbyfilter(page)"></pager-directive>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-default" id="modalViewDetail">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-target="#ProductInfo" data-toggle="tab">Thông tin sản phẩm</a>
+                    </li>
+                    <li>
+                        <a data-target="#ProductMaterials" data-toggle="tab">Các nguyên liệu</a>
+                    </li>
+                    <li>
+                        <a data-target="#ProductContentDetail" data-toggle="tab">Bài viết</a>
+                    </li>
+                    <li>
+                        <a data-target="#ProductProp" data-toggle="tab">Thuộc tính mở rộng</a>
+                    </li>
+                    <li>
+                        <a data-target="#ProductImages" data-toggle="tab">Ảnh sản phẩm</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-body form-horizontal">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="ProductInfo">
+                        <div class="form-group">
+                            <label class="col-sm-4">
+                                Ảnh sản phẩm
+                            </label>
+                            <div class="col-sm-8">
+                                <img ng-src="{{product.Image}}" alt="ảnh sản phẩm" style="width: 40px; height: 60px;" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4">
+                                Mã sản phẩm:
+                            </label>
+                            <div class="col-sm-8">
+                                {{product.BarCode}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4">
+                                Tên sản phẩm:
+                            </label>
+                            <div class="col-sm-8">
+                                {{product.Name}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4">
+                                Giá gốc:
+                            </label>
+                            <div class="col-sm-8">
+                                {{product.RootPrice | number:0}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4">
+                                Giá bán:
+                            </label>
+                            <div class="col-sm-8">
+                                {{product.Price | number:0}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4">
+                                nhóm sản phẩm:
+                            </label>
+                            <div class="col-sm-8">
+                                {{product.Group.Name}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4">
+                                Loại sản phẩm:
+                            </label>
+                            <div class="col-sm-8">
+                                {{product.Type.Name}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4">
+                                Mô tả: 
+                            </label>
+                            <div class="col-sm-8">
+                                {{product.Descreption}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4">
+                                Đơn vị tính:
+                            </label>
+                            <div class="col-sm-8">
+                                {{product.Unit}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4">
+                                Số lượng:
+                            </label>
+                            <div class="col-sm-8">
+                                {{product.Quantity}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4">
+                                Người tạo: 
+                            </label>
+                            <div class="col-sm-8">
+                                {{product.CreateBy}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4">
+                                Ngày tạo:
+                            </label>
+                            <div class="col-sm-8">
+                                {{product.CreateDate}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4">
+                                Người sửa:
+                            </label>
+                            <div class="col-sm-8">
+                                {{product.ModifyBy}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4">
+                                Ngày sửa:
+                            </label>
+                            <div class="col-sm-8">
+                                {{product.ModifyDate}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4">
+                                Trạng thái:
+                            </label>
+                            <div class="col-sm-8">
+                                {{product.Status | statusFilter}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="ProductMaterials">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center; width: 30px;">STT</th>
+                                    <th style="width: 80px">Mã</th>
+                                    <th style="width: 100px">Tên</th>
+                                    <th style="width: 50px">SL</th>
+                                    <th style="width: 100px">Đơn giá</th>
+                                    <th style="width: 80px">ĐVT</th>
+                                    <th style="width: 100px">Tổng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in lstMaterialChoossed">
+                                    <td align="center">
+                                        {{$index + 1}}
+                                    </td>
+                                    <td>{{item.MaterialCode}}</td>
+                                    <td>{{item.MaterialName}}</td>
+                                    <td align="right">
+                                        {{item.Quantity}}
+                                    </td>
+                                    <td align="right">
+                                        {{item.Price | number:0}}
+                                    </td>
+                                    <td align="center">{{item.Unit}}</td>
+                                    <td align="right">{{item.Amount | number:0}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="ProductContentDetail">
+                        {{product.Content | rawHtml}}
+                    </div>
+                    <div class="tab-pane fade" id="ProductProp">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width: 40%">Thuộc tính</th>
+                                    <th style="width: 60%">Giá trị</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in props">
+                                    <td>{{item.Key}}</td>
+                                    <td>{{item.Value}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="ProductImages">
+                        <ul class="list-inline">
+                            <li ng-repeat="img in images">
+                                <img ng-src="{{img}}" width="100" height="120" style="border: 1px dotted black" alt="" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

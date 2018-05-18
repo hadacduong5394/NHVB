@@ -1,0 +1,73 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4>THÔNG TIN NHÓM NGƯỜI DÙNG</h4>
+            </div>
+            <div class="panel-body">
+                <form role="form" id="detail-form" class="form-horizontal col-sm-offset-2 col-sm-8" novalidate name="frm" ng-submit="update()">
+                    <div class="form-group">
+                        <label class="col-sm-3 label-control">
+                            Tên nhóm
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="Name" ng-model="group.Name" ng-required="true" maxlength="128" />
+                            <span ng-show="frm.Name.$error.required" class="error">Tên không được bỏ trống</span>
+                            <span ng-show="frm.Name.$error.maxlength" class="error">Tên không vượt quá 128  kí tự</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 label-control">
+                            Mô tả
+                        </label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" ng-model="group.Descreption" name="Descreption" ng-required="true" ng-maxlength="128"></textarea>
+                            <span ng-show="frm.Descreption.$error.required" class="error">Mô tả không được bỏ trống</span>
+                            <span ng-show="frm.Descreption.$error.maxlength" class="error">Mô tả không vượt quá 128  kí tự</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 label-control">
+                            Trạng thái
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="checkbox" ng-model="group.Status" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="box">
+                            <div class="box-header">
+                                <h5>Chọn quyền hệ thống nhóm người dùng này được phép truy cập</h5>
+                            </div>
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12" ng-repeat="role in roles">
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" ng-model="role.IsCheck">
+                                                    <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                                                    {{role.Descreption}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="col-sm-offset-5 col-xs-offset-5">
+                            <button ui-sref="group" type="button" class="btn btn-default">
+                                Hủy
+                            </button>
+                            <button type="submit" class="btn btn-success" ng-disabled="frm.$invalid">
+                                Lưu
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

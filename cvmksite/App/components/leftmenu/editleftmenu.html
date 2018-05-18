@@ -1,0 +1,87 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4>THÔNG TIN MENU TRÁI</h4>
+            </div>
+            <div class="panel-body">
+                <form role="form" id="detail-form" class="form-horizontal col-sm-offset-2 col-sm-8" novalidate name="frm" ng-submit="update()">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">
+                                    Tên:
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="entity.Name" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-4">
+                                Danh mục cha:
+                            </label>
+                            <div class="col-sm-8">
+                                <select class="form-control" ng-model="entity.ParentId" ng-change="loadlastorder()" ng-options="item.Id as item.Name for item in parents">
+                                    <option value="">--Chọn danh mục cha--</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">
+                                    Icon:
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="entity.Icon" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-4">
+                                Tên module:
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" ng-model="entity.UI_SREF" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">
+                                    Số thứ tự:
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" ng-model="entity.OrderNumber" min="0" max="100" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-4">
+                                Trạng thái
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="checkbox" ng-model="entity.Status" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-footer">
+                        <div class="col-sm-offset-5 col-xs-offset-5">
+                            <button ui-sref="leftmenu" type="button" class="btn btn-default">
+                                Hủy
+                            </button>
+                            <button type="submit" class="btn btn-success" ng-disabled="frm.$invalid">
+                                Lưu
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
