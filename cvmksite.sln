@@ -9,10 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cvmk.service", "cvmk.servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cvmk.context", "cvmk.context\cvmk.context.csproj", "{4B43C330-E422-4980-9353-37119E64585D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "Test\UnitTest.csproj", "{275BFF97-8E12-4FBA-9605-1E3AF148F10F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "ConsoleApplication1\TestConsole.csproj", "{89E450C8-6012-47C9-BA5D-8000A14A6FFB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,14 +27,6 @@ Global
 		{4B43C330-E422-4980-9353-37119E64585D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B43C330-E422-4980-9353-37119E64585D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B43C330-E422-4980-9353-37119E64585D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{275BFF97-8E12-4FBA-9605-1E3AF148F10F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{275BFF97-8E12-4FBA-9605-1E3AF148F10F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{275BFF97-8E12-4FBA-9605-1E3AF148F10F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{275BFF97-8E12-4FBA-9605-1E3AF148F10F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{89E450C8-6012-47C9-BA5D-8000A14A6FFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{89E450C8-6012-47C9-BA5D-8000A14A6FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{89E450C8-6012-47C9-BA5D-8000A14A6FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{89E450C8-6012-47C9-BA5D-8000A14A6FFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
